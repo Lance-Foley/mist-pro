@@ -1,50 +1,94 @@
 <div id="<%= dom_id project %>">
-  <div class="mb-4">
-    <p class="text-sm font-medium text-gray-500">Name</p>
-    <%= project.name %>
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-3xl font-medium text-dark-lava"><%= project.name %></h2>
+    <div class="flex items-center">
+      <input type="checkbox" class="form-checkbox h-6 w-6 text-carolina-blue project-status" <%= project.status ? 'checked' : '' %> data-project-id="<%= project.id %>" data-controller="project-status" data-action="change->project-status#toggle">
+
+      <span class="text-lg font-medium text-dark-lava ml-2">Active</span>
+      <div class="ml-6">
+        <a href="#" class="text-carolina-blue hover:text-dark-lava font-medium text-lg">Edit</a>
+        <a href="#" class="text-carolina-blue hover:text-dark-lava font-medium text-lg ml-4">Delete</a>
+      </div>
+    </div>
   </div>
-  <div class="mb-4">
-    <p class="text-sm font-medium text-gray-500">Type</p>
-    <%= project.type %>
+  <div class="mb-6">
+    <h3 class="text-xl font-medium text-carolina-blue mb-2">Project Details</h3>
+    <dl class="grid grid-cols-2 gap-x-4 gap-y-2">
+      <div>
+        <dt class="text-dark-lava font-medium">Category</dt>
+        <dd class="text-dark-lava"><%= project.category %></dd>
+      </div>
+      <div>
+        <dt class="text-dark-lava font-medium">Start Date</dt>
+        <dd class="text-dark-lava"><%= project.start_date.strftime("%d %b %Y") %></dd>
+      </div>
+      <div>
+        <dt class="text-dark-lava font-medium">End Date</dt>
+        <dd class="text-dark-lava"><%= project.end_date.strftime("%d %b %Y") %></dd>
+      </div>
+      <div>
+        <dt class="text-dark-lava font-medium">Cost</dt>
+        <dd class="text-dark-lava">$<%= number_with_precision(project.cost, precision: 2) %></dd>
+      </div>
+      <div>
+        <dt class="text-dark-lava font-medium">Amount Down</dt>
+        <dd class="text-dark-lava">$<%= number_with_precision(project.amount_down, precision: 2) %></dd>
+      </div>
+      <div>
+        <dt class="text-dark-lava font-medium">Amount Down Date</dt>
+        <dd class="text-dark-lava"><%= project.amount_down_date.strftime("%d %b %Y") %></dd>
+      </div>
+      <div>
+        <dt class="text-dark-lava font-medium">Amount Withheld</dt>
+        <dd class="text-dark-lava">$<%= number_with_precision(project.amount_with_held, precision: 2) %></dd>
+      </div>
+      <div>
+        <dt class="text-dark-lava font-medium">Amount Withheld Date</dt>
+        <dd class="text-dark-lava"><%= project.amount_with_held_date.strftime("%d %b %Y") %></dd>
+      </div>
+      <div>
+        <dt class="text-dark-lava font-medium">Contact Info</dt>
+        <dd class="text-dark-lava"><%= project.contact_info %></dd>
+      </div>
+      <div>
+        <dt class="text-dark-lava font-medium">Status</dt>
+        <dd class="text-dark-lava"><%= project.status %></dd>
+      </div>
+    </dl>
   </div>
-  <div class="mb-4">
-    <p class="text-sm font-medium text-gray-500">Start date</p>
-    <%= project.start_date %>
-  </div>
-  <div class="mb-4">
-    <p class="text-sm font-medium text-gray-500">End date</p>
-    <%= project.end_date %>
-  </div>
-  <div class="mb-4">
-    <p class="text-sm font-medium text-gray-500">Cost</p>
-    <%= project.cost %>
-  </div>
-  <div class="mb-4">
-    <p class="text-sm font-medium text-gray-500">Amount down</p>
-    <%= project.amount_down %>
-  </div>
-  <div class="mb-4">
-    <p class="text-sm font-medium text-gray-500">Amount down date</p>
-    <%= project.amount_down_date %>
-  </div>
-  <div class="mb-4">
-    <p class="text-sm font-medium text-gray-500">Amount with held</p>
-    <%= project.amount_with_held %>
-  </div>
-  <div class="mb-4">
-    <p class="text-sm font-medium text-gray-500">Amount with held date</p>
-    <%= project.amount_with_held_date %>
-  </div>
-  <div class="mb-4">
-    <p class="text-sm font-medium text-gray-500">Contact info</p>
-    <%= project.contact_info %>
-  </div>
-  <div class="mb-4">
-    <p class="text-sm font-medium text-gray-500">Status</p>
-    <%= project.status %>
-  </div>
-  <div class="mb-4">
-    <p class="text-sm font-medium text-gray-500">Client</p>
-    <%= project.client_id %>
-  </div>
+      <div class="mt-6">
+        <h3 class="text-carolina-blue font-medium text-2xl mb-4">Jobs</h3>
+        <div class="overflow-x-auto">
+          <table class="table-auto border-collapse w-full">
+            <thead>
+            <tr>
+              <th class="text-left px-4 py-2 bg-carolina-blue text-white rounded-tl-lg">Name</th>
+              <th class="text-left px-4 py-2 bg-carolina-blue text-white">Crew</th>
+              <th class="text-left px-4 py-2 bg-carolina-blue text-white">Bid Hours</th>
+              <th class="text-left px-4 py-2 bg-carolina-blue text-white">Actual Hours</th>
+              <th class="text-left px-4 py-2 bg-carolina-blue text-white">Start Date</th>
+              <th class="text-left px-4 py-2 bg-carolina-blue text-white">End Date</th>
+              <th class="text-left px-4 py-2 bg-carolina-blue text-white rounded-tr-lg">Cost</th>
+            </tr>
+            </thead>
+          <tbody>
+          <%# project.jobs.each do |job| %>
+<!--            <tr>-->
+<!--              <td class="border px-4 py-2"><%#= job.name %></td>-->
+<!--              <td class="border px-4 py-2"><%#= job.crew %></td>-->
+<!--              <td class="border px-4 py-2"><%#= job.bid_hours %></td>-->
+<!--              <td class="border px-4 py-2"><%#= job.actual_hours %></td>-->
+<!--              <td class="border px-4 py-2"><%#= job.start_date %></td>-->
+<!--              <td class="border px-4 py-2"><%#= job.end_date %></td>-->
+<!--              <td class="border px-4 py-2"><%#= job.cost %></td>-->
+<!--            </tr>-->
+          <%# end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-6">
+        <%#= render partial: 'jobs/form', locals: { project: project, job: Job.new } %>
+      </div>
+    </div>
+
 </div>

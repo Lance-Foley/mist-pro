@@ -13,6 +13,11 @@
 #  secondary_name           :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
+#  account_id               :integer
+#
+# Indexes
+#
+#  index_clients_on_account_id  (account_id)
 #
 require "test_helper"
 

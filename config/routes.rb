@@ -1,7 +1,9 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
-  resources :projects
-  resources :clients do
+  resources :projects, only: [:show, :edit, :update, :destroy], shallow: true do
+    resources :jobs
+  end
+  resources :clients, shallow: true do
     resources :projects
   end
   draw :turbo

@@ -34,6 +34,16 @@ module.exports = {
         danger: colors.red,
         "code-400": "#fefcf9",
         "code-600": "#3c455b",
+        white: "#FFFFFF",
+        black: "#000000",
+        "carolina-blue": {
+          DEFAULT: "#1598D5",
+          rgb: "21,152,213",
+        },
+        "dark-lava": {
+          DEFAULT: "#463F3A",
+          rgb: "70,63,58",
+        },
       },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],

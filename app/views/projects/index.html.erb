@@ -9,7 +9,7 @@
       <div class="text-sm font-medium">
         <span class="text-gray-500">Sort by:</span>
         <%= sortable @projects, :name, "Name", class: "text-gray-700 mr-1" %>
-        <%= sortable @projects, :type, "Type", class: "text-gray-700 mr-1" %>
+        <%= sortable @projects, :category, "Type", class: "text-gray-700 mr-1" %>
         <%= sortable @projects, :start_date, "Start date", class: "text-gray-700 mr-1" %>
         <%= sortable @projects, :end_date, "End date", class: "text-gray-700 mr-1" %>
         <%= sortable @projects, :cost, "Cost", class: "text-gray-700 mr-1" %>
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <%= link_to t("shared.scaffold.new.title", model: "Project"), new_project_path, class: "btn btn-white" %>
+    <%= link_to t("shared.scaffold.new.title", model: "Project"), new_client_project_path, class: "btn btn-white" %>
   </div>
 
   <%= tag.div id: ("projects" if first_page?), class: "bg-white rounded-md shadow p-6 space-y-8" do %>
@@ -33,7 +33,7 @@
       <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
       <div class="flex-1 text-center">
         <p class="mb-4 h3">Create your first Project</p>
-        <%= link_to t("shared.scaffold.new.title", model: "Project"), new_project_path, class: "btn btn-primary" %>
+        <%= link_to t("shared.scaffold.new.title", model: "Project"), new_client_project_path, class: "btn btn-primary" %>
       </div>
     </div>
   <% end %>

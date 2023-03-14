@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="h-full antialiased" lang="<%= I18n.locale %>">
+<html class="h-full antialiased bg-white " lang="<%= I18n.locale %>">
   <head>
     <title>
       <% if content_for?(:title) %>
@@ -27,7 +27,7 @@
     <%= yield :head %>
   </head>
 
-  <body class="h-full font-sans antialiased font-normal leading-normal bg-gray-50">
+  <body class="h-full font-sans antialiased font-normal leading-normal bg-gray-50 ">
     <div class="main flex flex-col">
       <%= render partial: "shared/flash" %>
       <%= render partial: "shared/navbar" %>
