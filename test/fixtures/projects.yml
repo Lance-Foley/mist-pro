@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  type: 
+  start_date: 2023-03-14
+  end_date: 2023-03-14
+  cost: 9.99
+  amount_down: 9.99
+  amount_down_date: 2023-03-14
+  amount_with_held: 9.99
+  amount_with_held_date: 2023-03-14
+  contact_info: MyText
+  status: false
+  client: one
+
+two:
+  name: MyString
+  type: 
+  start_date: 2023-03-14
+  end_date: 2023-03-14
+  cost: 9.99
+  amount_down: 9.99
+  amount_down_date: 2023-03-14
+  amount_with_held: 9.99
+  amount_with_held_date: 2023-03-14
+  contact_info: MyText
+  status: false
+  client: two

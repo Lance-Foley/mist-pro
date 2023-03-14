@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_04_162609) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_14_140118) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -132,6 +132,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_04_162609) do
     t.datetime "updated_at", null: false
     t.index ["token"], name: "index_api_tokens_on_token", unique: true
     t.index ["user_id"], name: "index_api_tokens_on_user_id"
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "business_phone"
+    t.string "cell_phone"
+    t.string "secondary_name"
+    t.string "secondary_email"
+    t.string "secondary_business_phone"
+    t.string "secondary_cell_phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "connected_accounts", force: :cascade do |t|
@@ -273,6 +286,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_04_162609) do
     t.boolean "charge_per_unit"
   end
 
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.date "start_date"
+    t.date "end_date"
+    t.decimal "cost"
+    t.decimal "amount_down"
+    t.date "amount_down_date"
+    t.decimal "amount_with_held"
+    t.date "amount_with_held_date"
+    t.text "contact_info"
+    t.boolean "status"
+    t.bigint "client_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_projects_on_client_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -323,4 +354,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_04_162609) do
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
   add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"
   add_foreign_key "pay_subscriptions", "pay_customers", column: "customer_id"
+  add_foreign_key "projects", "clients"
 end

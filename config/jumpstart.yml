@@ -1,0 +1,17 @@
+--- !ruby/object:Jumpstart::Configuration
+application_name: MIST App
+business_name: MIST
+business_address: ''
+domain: mistapp.dev
+default_from_email: support@mistapp.dev
+support_email: support@mistapp.dev
+background_job_processor: sidekiq
+email_provider: sendgrid
+personal_accounts: false
+solargraph: true
+register_with_account: true
+apns: false
+fcm: false
+collect_billing_address: true
+payment_processors:
+- stripe

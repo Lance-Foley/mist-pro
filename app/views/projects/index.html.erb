@@ -1,0 +1,46 @@
+<%= content_for :title, "Projects" %>
+<%= turbo_stream_from :projects %>
+
+<div class="container px-4 mx-auto my-8">
+  <div class="flex items-center justify-between mb-4">
+    <div>
+      <h1 class="h3">Projects</h1>
+
+      <div class="text-sm font-medium">
+        <span class="text-gray-500">Sort by:</span>
+        <%= sortable @projects, :name, "Name", class: "text-gray-700 mr-1" %>
+        <%= sortable @projects, :type, "Type", class: "text-gray-700 mr-1" %>
+        <%= sortable @projects, :start_date, "Start date", class: "text-gray-700 mr-1" %>
+        <%= sortable @projects, :end_date, "End date", class: "text-gray-700 mr-1" %>
+        <%= sortable @projects, :cost, "Cost", class: "text-gray-700 mr-1" %>
+        <%= sortable @projects, :amount_down, "Amount down", class: "text-gray-700 mr-1" %>
+        <%= sortable @projects, :amount_down_date, "Amount down date", class: "text-gray-700 mr-1" %>
+        <%= sortable @projects, :amount_with_held, "Amount with held", class: "text-gray-700 mr-1" %>
+        <%= sortable @projects, :amount_with_held_date, "Amount with held date", class: "text-gray-700 mr-1" %>
+        <%= sortable @projects, :contact_info, "Contact info", class: "text-gray-700 mr-1" %>
+        <%= sortable @projects, :status, "Status", class: "text-gray-700 mr-1" %>
+        <%= sortable @projects, :client_id, "Client", class: "text-gray-700 mr-1" %>
+      </div>
+    </div>
+
+    <%= link_to t("shared.scaffold.new.title", model: "Project"), new_project_path, class: "btn btn-white" %>
+  </div>
+
+  <%= tag.div id: ("projects" if first_page?), class: "bg-white rounded-md shadow p-6 space-y-8" do %>
+    <%= render partial: "projects/index", collection: @projects, as: :project, cached: true %>
+
+    <div class="hidden only:flex flex-col items-center justify-between lg:flex-row">
+      <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+      <div class="flex-1 text-center">
+        <p class="mb-4 h3">Create your first Project</p>
+        <%= link_to t("shared.scaffold.new.title", model: "Project"), new_project_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @pagy.pages > 1 %>
+    <div class="my-6 text-center">
+      <%== pagy_nav(@pagy) %>
+    </div>
+  <% end %>
+</div>
