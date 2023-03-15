@@ -1,5 +1,13 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
+  resources :change_orders
+  resources :temp_employees
+  resources :temp_crews
+  resources :cost_codes
+  resources :employees
+  resources :crews
+  resources :divisions
+  resources :jobs
   resources :projects, only: [:show, :edit, :update, :destroy], shallow: true do
     resources :jobs
   end

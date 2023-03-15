@@ -1,0 +1,41 @@
+# == Schema Information
+#
+# Table name: employees
+#
+#  id         :bigint           not null, primary key
+#  first_name :string
+#  hire_date  :date
+#  hours      :decimal(, )
+#  last_name  :string
+#  status     :string
+#  wage       :decimal(, )
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  crew_id    :bigint           not null
+#
+# Indexes
+#
+#  index_employees_on_crew_id  (crew_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (crew_id => crews.id)
+#
+
+one:
+  first_name: MyString
+  last_name: MyString
+  hire_date: 2023-03-15
+  wage: 9.99
+  hours: 9.99
+  status: MyString
+  crew: one
+
+two:
+  first_name: MyString
+  last_name: MyString
+  hire_date: 2023-03-15
+  wage: 9.99
+  hours: 9.99
+  status: MyString
+  crew: two

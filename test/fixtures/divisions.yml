@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: divisions
+#
+#  id              :bigint           not null, primary key
+#  name            :string
+#  overtime_after  :decimal(, )
+#  overtime_rate   :decimal(, )
+#  utlization_rate :decimal(, )
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
+one:
+  name: MyString
+  utlization_rate: 9.99
+  overtime_rate: 9.99
+  overtime_after: 9.99
+
+two:
+  name: MyString
+  utlization_rate: 9.99
+  overtime_rate: 9.99
+  overtime_after: 9.99

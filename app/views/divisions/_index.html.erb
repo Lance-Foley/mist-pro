@@ -1,0 +1,6 @@
+<div id="<%= dom_id(division, :index) %>">
+  <%= turbo_stream_from division %>
+  <%= render division %>
+  <%= link_to "View", division, class: "btn btn-white" %>
+</div>
+

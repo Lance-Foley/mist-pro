@@ -31,6 +31,8 @@
 class Project < ApplicationRecord
   acts_as_tenant :account
   belongs_to :client
+  has_many :change_orders
+  has_many :jobs, as: :jobable
   validates_presence_of :client, :name, :start_date, :end_date
   # Broadcast changes in realtime with Hotwire
   after_create_commit -> { broadcast_prepend_later_to :projects, partial: "projects/index", locals: {project: self} }

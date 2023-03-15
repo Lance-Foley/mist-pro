@@ -1,0 +1,48 @@
+<%= form_with(model: employee) do |form| %>
+  <%= render "shared/error_messages", resource: form.object %>
+
+  <div class="form-group">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :hire_date %>
+    <%= form.date_field :hire_date, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :wage %>
+    <%= form.text_field :wage, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :hours %>
+    <%= form.text_field :hours, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :status %>
+    <%= form.text_field :status, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :crew_id %>
+    <%= form.collection_select :crew_id, @crews, :id, :name, prompt: "Select a crew" %>
+  </div>
+
+  <div>
+    <%= form.button button_text(form.send(:submit_default_value)), class: "btn btn-primary" %>
+
+    <% if form.object.new_record? %>
+      <%= link_to t("cancel"), employees_path, class: "btn btn-white" %>
+    <% else %>
+      <%= link_to t("cancel"), employee_path(@employee), class: "btn btn-white" %>
+    <% end %>
+  </div>
+<% end %>

@@ -1,6 +1,6 @@
 Style/Documentation:
-  Enabled: false
+  Enabled: true
 Style/DoubleNegation:
-  Enabled: false
+  Enabled: true
 Style/StringLiterals:
-  Enabled: false
+  Enabled: true

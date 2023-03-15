@@ -72,17 +72,17 @@
             </tr>
             </thead>
           <tbody>
-          <%# project.jobs.each do |job| %>
-<!--            <tr>-->
-<!--              <td class="border px-4 py-2"><%#= job.name %></td>-->
+          <% project.jobs.each do |job| %>
+            <tr>
+              <td class="border px-4 py-2"><%= job.name %></td>
 <!--              <td class="border px-4 py-2"><%#= job.crew %></td>-->
-<!--              <td class="border px-4 py-2"><%#= job.bid_hours %></td>-->
-<!--              <td class="border px-4 py-2"><%#= job.actual_hours %></td>-->
-<!--              <td class="border px-4 py-2"><%#= job.start_date %></td>-->
-<!--              <td class="border px-4 py-2"><%#= job.end_date %></td>-->
-<!--              <td class="border px-4 py-2"><%#= job.cost %></td>-->
-<!--            </tr>-->
-          <%# end %>
+              <td class="border px-4 py-2"><%= job.bid_hours %></td>
+              <td class="border px-4 py-2"><%= job.actual_hours %></td>
+              <td class="border px-4 py-2"><%= job.start_date %></td>
+              <td class="border px-4 py-2"><%= job.end_date %></td>
+              <td class="border px-4 py-2"><%= job.cost %></td>
+            </tr>
+          <% end %>
           </tbody>
         </table>
       </div>
@@ -90,5 +90,8 @@
         <%#= render partial: 'jobs/form', locals: { project: project, job: Job.new } %>
       </div>
     </div>
-
+  <div class="mb-6">
+    <h2 class="text-lg font-semibold mb-2">Add a new Job</h2>
+    <%= render 'jobs/form', jobable: @project, job: @job %>
+  </div>
 </div>

@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
-  before_action :set_client, only: [:new, :create, :index]
+  before_action :set_project, only: %i[show edit update destroy]
+  before_action :set_client, only: %i[new create index]
   # Uncomment to enforce Pundit authorization
   # after_action :verify_authorized
   # rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
@@ -15,6 +15,8 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1 or /projects/1.json
   def show
+    @job = @project.jobs.build
+    @cost_codes = CostCode.all
   end
 
   # GET /projects/new
@@ -37,7 +39,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to client_path(@client), notice: "Project was successfully created." }
+        format.html { redirect_to client_path(@client), notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -50,7 +52,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        format.html { redirect_to client_path(@client), notice: "Project was successfully updated." }
+        format.html { redirect_to client_path(@client), notice: 'Project was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -63,7 +65,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, status: :see_other, notice: "Project was successfully destroyed." }
+      format.html { redirect_to projects_url, status: :see_other, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

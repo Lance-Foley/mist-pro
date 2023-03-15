@@ -1,0 +1,43 @@
+<%= content_for :title, "Change Orders" %>
+<%= turbo_stream_from :change_orders %>
+
+<div class="container px-4 mx-auto my-8">
+  <div class="flex items-center justify-between mb-4">
+    <div>
+      <h1 class="h3">Change Orders</h1>
+
+      <div class="text-sm font-medium">
+        <span class="text-gray-500">Sort by:</span>
+        <%= sortable @change_orders, :name, "Name", class: "text-gray-700 mr-1" %>
+        <%= sortable @change_orders, :cost, "Cost", class: "text-gray-700 mr-1" %>
+        <%= sortable @change_orders, :amount_down, "Amount down", class: "text-gray-700 mr-1" %>
+        <%= sortable @change_orders, :amount_with_held, "Amount with held", class: "text-gray-700 mr-1" %>
+        <%= sortable @change_orders, :start_date, "Start date", class: "text-gray-700 mr-1" %>
+        <%= sortable @change_orders, :end_date, "End date", class: "text-gray-700 mr-1" %>
+        <%= sortable @change_orders, :amount_down_date, "Amount down date", class: "text-gray-700 mr-1" %>
+        <%= sortable @change_orders, :amount_with_held_date, "Amount with held date", class: "text-gray-700 mr-1" %>
+        <%= sortable @change_orders, :project_id, "Project", class: "text-gray-700 mr-1" %>
+      </div>
+    </div>
+
+    <%= link_to t("shared.scaffold.new.title", model: "Change Order"), new_change_order_path, class: "btn btn-white" %>
+  </div>
+
+  <%= tag.div id: ("change_orders" if first_page?), class: "bg-white rounded-md shadow p-6 space-y-8" do %>
+    <%= render partial: "change_orders/index", collection: @change_orders, as: :change_order, cached: true %>
+
+    <div class="hidden only:flex flex-col items-center justify-between lg:flex-row">
+      <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+      <div class="flex-1 text-center">
+        <p class="mb-4 h3">Create your first Change Order</p>
+        <%= link_to t("shared.scaffold.new.title", model: "Change Order"), new_change_order_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @pagy.pages > 1 %>
+    <div class="my-6 text-center">
+      <%== pagy_nav(@pagy) %>
+    </div>
+  <% end %>
+</div>
