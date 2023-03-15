@@ -34,7 +34,6 @@ class TempCrew < ApplicationRecord
   after_update_commit -> { broadcast_replace_later_to self }
   after_destroy_commit -> { broadcast_remove_to :temp_crews, target: dom_id(self, :index) }
 
-
   def end_date_after_start_date
     return if end_date.blank? || start_date.blank?
 
