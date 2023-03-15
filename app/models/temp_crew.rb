@@ -29,7 +29,6 @@ class TempCrew < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
   validate :end_date_after_start_date
-  
   # Broadcast changes in realtime with Hotwire
   after_create_commit -> { broadcast_prepend_later_to :temp_crews, partial: 'temp_crews/index', locals: {temp_crew: self} }
   after_update_commit -> { broadcast_replace_later_to self }
@@ -39,9 +38,9 @@ class TempCrew < ApplicationRecord
   def end_date_after_start_date
     return if end_date.blank? || start_date.blank?
 
-    if end_date < start_date
-      errors.add(:end_date, 'must be after the start date')
-    end
+    return unless end_date < start_date
+
+    errors.add(:end_date, 'must be after the start date')
   end
 
   def total_hours
