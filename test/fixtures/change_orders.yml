@@ -1,0 +1,47 @@
+# == Schema Information
+#
+# Table name: change_orders
+#
+#  id                    :bigint           not null, primary key
+#  amount_down           :decimal(, )
+#  amount_down_date      :date
+#  amount_with_held      :decimal(, )
+#  amount_with_held_date :date
+#  cost                  :decimal(, )
+#  end_date              :date
+#  name                  :string
+#  start_date            :date
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  project_id            :bigint           not null
+#
+# Indexes
+#
+#  index_change_orders_on_project_id  (project_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (project_id => projects.id)
+#
+
+one:
+  name: MyString
+  cost: 9.99
+  amount_down: 9.99
+  amount_with_held: 9.99
+  start_date: 2023-03-15
+  end_date: 2023-03-15
+  amount_down_date: 2023-03-15
+  amount_with_held_date: 2023-03-15
+  project: one
+
+two:
+  name: MyString
+  cost: 9.99
+  amount_down: 9.99
+  amount_with_held: 9.99
+  start_date: 2023-03-15
+  end_date: 2023-03-15
+  amount_down_date: 2023-03-15
+  amount_with_held_date: 2023-03-15
+  project: two

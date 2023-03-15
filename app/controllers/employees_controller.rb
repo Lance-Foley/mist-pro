@@ -20,7 +20,7 @@ class EmployeesController < ApplicationController
   # GET /employees/new
   def new
     @employee = Employee.new
-
+    @crews = Crew.all
     # Uncomment to authorize with Pundit
     # authorize @employee
   end

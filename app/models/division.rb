@@ -11,6 +11,7 @@
 #  updated_at      :datetime         not null
 #
 class Division < ApplicationRecord
+  has_many :crews
   # Broadcast changes in realtime with Hotwire
   after_create_commit -> { broadcast_prepend_later_to :divisions, partial: "divisions/index", locals: {division: self} }
   after_update_commit -> { broadcast_replace_later_to self }

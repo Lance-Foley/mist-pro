@@ -15,6 +15,8 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1 or /projects/1.json
   def show
+    @job = @project.jobs.build
+    @cost_codes = CostCode.all
   end
 
   # GET /projects/new

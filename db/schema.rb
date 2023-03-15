@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_15_182141) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_15_184656) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -134,6 +134,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_182141) do
     t.index ["user_id"], name: "index_api_tokens_on_user_id"
   end
 
+  create_table "change_orders", force: :cascade do |t|
+    t.string "name"
+    t.decimal "cost"
+    t.decimal "amount_down"
+    t.decimal "amount_with_held"
+    t.date "start_date"
+    t.date "end_date"
+    t.date "amount_down_date"
+    t.date "amount_with_held_date"
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_change_orders_on_project_id"
+  end
+
   create_table "clients", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -213,7 +228,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_182141) do
     t.decimal "cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "jobable_type", null: false
+    t.bigint "jobable_id", null: false
     t.index ["cost_code_id"], name: "index_jobs_on_cost_code_id"
+    t.index ["jobable_type", "jobable_id"], name: "index_jobs_on_jobable"
   end
 
   create_table "notification_tokens", force: :cascade do |t|
@@ -434,6 +452,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_15_182141) do
   add_foreign_key "accounts", "users", column: "owner_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "api_tokens", "users"
+  add_foreign_key "change_orders", "projects"
   add_foreign_key "crews", "divisions"
   add_foreign_key "employees", "crews"
   add_foreign_key "jobs", "cost_codes"

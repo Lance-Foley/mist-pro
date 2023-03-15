@@ -20,7 +20,7 @@ class CrewsController < ApplicationController
   # GET /crews/new
   def new
     @crew = Crew.new
-
+    @divisions = Division.all
     # Uncomment to authorize with Pundit
     # authorize @crew
   end
@@ -74,7 +74,6 @@ class CrewsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_crew
     @crew = Crew.find(params[:id])
-
     # Uncomment to authorize with Pundit
     # authorize @crew
   rescue ActiveRecord::RecordNotFound
@@ -83,7 +82,7 @@ class CrewsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def crew_params
-    params.require(:crew).permit(:name, :divsion_id, :leader_id)
+    params.require(:crew).permit(:name, :division_id, :leader_id)
 
     # Uncomment to use Pundit permitted attributes
     # params.require(:crew).permit(policy(@crew).permitted_attributes)

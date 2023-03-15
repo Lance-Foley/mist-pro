@@ -18,7 +18,7 @@
 #  fk_rails_...  (division_id => divisions.id)
 #
 class Crew < ApplicationRecord
-  belongs_to :divsion
+  belongs_to :division
   # Broadcast changes in realtime with Hotwire
   after_create_commit -> { broadcast_prepend_later_to :crews, partial: "crews/index", locals: {crew: self} }
   after_update_commit -> { broadcast_replace_later_to self }

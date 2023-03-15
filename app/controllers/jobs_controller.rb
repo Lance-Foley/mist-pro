@@ -32,13 +32,14 @@ class JobsController < ApplicationController
   # POST /jobs or /jobs.json
   def create
     @job = Job.new(job_params)
-
+    @job.jobable = Project.find(params[:project_id]) if params[:project_id]
+    @job.jobable = ChangeOrder.find(params[:change_order_id]) if params[:change_order_id]
     # Uncomment to authorize with Pundit
     # authorize @job
 
     respond_to do |format|
       if @job.save
-        format.html { redirect_to @job, notice: "Job was successfully created." }
+        format.html { redirect_to @job.jobable, notice: "Job was successfully created." }
         format.json { render :show, status: :created, location: @job }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -51,7 +52,7 @@ class JobsController < ApplicationController
   def update
     respond_to do |format|
       if @job.update(job_params)
-        format.html { redirect_to @job, notice: "Job was successfully updated." }
+        format.html { redirect_to @job.jobable, notice: "Job was successfully updated." }
         format.json { render :show, status: :ok, location: @job }
       else
         format.html { render :edit, status: :unprocessable_entity }

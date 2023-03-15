@@ -33,7 +33,7 @@
 
   <div class="form-group">
     <%= form.label :crew_id %>
-    <%= form.text_field :crew_id, class: "form-control" %>
+    <%= form.collection_select :crew_id, @crews, :id, :name, prompt: "Select a crew" %>
   </div>
 
   <div>
