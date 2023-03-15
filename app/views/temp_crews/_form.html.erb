@@ -1,0 +1,38 @@
+<%= form_with(model: temp_crew) do |form| %>
+  <%= render "shared/error_messages", resource: form.object %>
+
+  <div class="form-group">
+    <%= form.label :job_id %>
+    <%= form.text_field :job_id, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :crew_id %>
+    <%= form.text_field :crew_id, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :start_date %>
+    <%= form.date_field :start_date, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :end_date %>
+    <%= form.date_field :end_date, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.button button_text(form.send(:submit_default_value)), class: "btn btn-primary" %>
+
+    <% if form.object.new_record? %>
+      <%= link_to t("cancel"), temp_crews_path, class: "btn btn-white" %>
+    <% else %>
+      <%= link_to t("cancel"), temp_crew_path(@temp_crew), class: "btn btn-white" %>
+    <% end %>
+  </div>
+<% end %>

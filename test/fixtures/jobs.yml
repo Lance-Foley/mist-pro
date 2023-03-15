@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  bid_hours: 9.99
+  actual_hours: 9.99
+  start_date: 2023-03-15
+  end_date: 2023-03-15
+  cost_code: one
+  cost: 9.99
+
+two:
+  name: MyString
+  bid_hours: 9.99
+  actual_hours: 9.99
+  start_date: 2023-03-15
+  end_date: 2023-03-15
+  cost_code: two
+  cost: 9.99

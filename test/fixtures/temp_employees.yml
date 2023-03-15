@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_date: 2023-03-15
+  end_date: 2023-03-15
+  override_hours: 9.99
+  override_type: MyString
+  temp_crew: one
+  employee: one
+  job: one
+
+two:
+  start_date: 2023-03-15
+  end_date: 2023-03-15
+  override_hours: 9.99
+  override_type: MyString
+  temp_crew: two
+  employee: two
+  job: two

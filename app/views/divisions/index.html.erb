@@ -1,0 +1,38 @@
+<%= content_for :title, "Divisions" %>
+<%= turbo_stream_from :divisions %>
+
+<div class="container px-4 mx-auto my-8">
+  <div class="flex items-center justify-between mb-4">
+    <div>
+      <h1 class="h3">Divisions</h1>
+
+      <div class="text-sm font-medium">
+        <span class="text-gray-500">Sort by:</span>
+        <%= sortable @divisions, :name, "Name", class: "text-gray-700 mr-1" %>
+        <%= sortable @divisions, :utlization_rate, "Utlization rate", class: "text-gray-700 mr-1" %>
+        <%= sortable @divisions, :overtime_rate, "Overtime rate", class: "text-gray-700 mr-1" %>
+        <%= sortable @divisions, :overtime_after, "Overtime after", class: "text-gray-700 mr-1" %>
+      </div>
+    </div>
+
+    <%= link_to t("shared.scaffold.new.title", model: "Division"), new_division_path, class: "btn btn-white" %>
+  </div>
+
+  <%= tag.div id: ("divisions" if first_page?), class: "bg-white rounded-md shadow p-6 space-y-8" do %>
+    <%= render partial: "divisions/index", collection: @divisions, as: :division, cached: true %>
+
+    <div class="hidden only:flex flex-col items-center justify-between lg:flex-row">
+      <%= image_tag "empty.svg", class: "mb-4 lg:w-1/2" %>
+      <div class="flex-1 text-center">
+        <p class="mb-4 h3">Create your first Division</p>
+        <%= link_to t("shared.scaffold.new.title", model: "Division"), new_division_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if @pagy.pages > 1 %>
+    <div class="my-6 text-center">
+      <%== pagy_nav(@pagy) %>
+    </div>
+  <% end %>
+</div>
