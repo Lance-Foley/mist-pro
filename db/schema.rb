@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_01_175958) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_02_140122) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -197,6 +197,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_175958) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "employee_job_assignments", force: :cascade do |t|
+    t.bigint "employee_id", null: false
+    t.bigint "job_assignment_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.index ["employee_id"], name: "index_employee_job_assignments_on_employee_id"
+    t.index ["job_assignment_id"], name: "index_employee_job_assignments_on_job_assignment_id"
+  end
+
   create_table "employees", force: :cascade do |t|
     t.string "name"
     t.integer "workable_hours"
@@ -210,13 +221,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_175958) do
 
   create_table "job_assignments", force: :cascade do |t|
     t.bigint "job_id", null: false
-    t.bigint "employee_id", null: false
     t.bigint "crew_id", null: false
     t.date "employee_start_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["crew_id"], name: "index_job_assignments_on_crew_id"
-    t.index ["employee_id"], name: "index_job_assignments_on_employee_id"
     t.index ["job_id"], name: "index_job_assignments_on_job_id"
   end
 
@@ -428,8 +437,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_175958) do
   add_foreign_key "change_orders", "projects"
   add_foreign_key "crew_members", "crews"
   add_foreign_key "crew_members", "employees"
+  add_foreign_key "employee_job_assignments", "employees"
+  add_foreign_key "employee_job_assignments", "job_assignments"
   add_foreign_key "job_assignments", "crews"
-  add_foreign_key "job_assignments", "employees"
   add_foreign_key "job_assignments", "jobs"
   add_foreign_key "jobs", "projects"
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"

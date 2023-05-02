@@ -13,13 +13,14 @@
 #  updated_at     :datetime         not null
 #
 class Employee < ApplicationRecord
-  has_many :job_assignments
+  has_many :employee_job_assignments
+  has_many :job_assignments, through: :employee_job_assignments
   has_many :jobs, through: :job_assignments
   has_one :crew_member
   has_one :crew, through: :crew_member
   # Broadcast changes in realtime with Hotwire
   after_create_commit(
-    -> { broadcast_prepend_later_to(:employees, partial: 'employees/index', locals: { employee: self }) }
+    -> { broadcast_prepend_later_to(:employees, partial: "employees/index", locals: {employee: self}) }
   )
   after_update_commit -> { broadcast_replace_later_to(self) }
   after_destroy_commit -> { broadcast_remove_to(:employees, target: dom_id(self, :index)) }

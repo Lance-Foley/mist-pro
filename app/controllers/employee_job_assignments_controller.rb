@@ -1,0 +1,2 @@
+class EmployeeJobAssignmentsController < ApplicationController
+end

@@ -26,9 +26,11 @@ class JobsController < ApplicationController
         # Get selected employee_ids for this crew
         selected_employee_ids = params["crew_#{crew_id}"][:employee_ids].reject(&:blank?).map(&:to_i)
 
+        job_assignment = JobAssignment.create(job: @job, crew:)
+
         selected_employee_ids.each do |employee_id|
           employee = Employee.find(employee_id)
-          job_assignment = JobAssignment.create(job: @job, employee:, crew:)
+          EmployeeJobAssignment.create(job_assignment:, employee:)
         end
       end
 
