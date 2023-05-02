@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: crew_members
+#
+#  id          :bigint           not null, primary key
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  crew_id     :bigint           not null
+#  employee_id :bigint           not null
+#
+# Indexes
+#
+#  index_crew_members_on_crew_id      (crew_id)
+#  index_crew_members_on_employee_id  (employee_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (crew_id => crews.id)
+#  fk_rails_...  (employee_id => employees.id)
+#
+require "test_helper"
+
+class CrewMemberTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end

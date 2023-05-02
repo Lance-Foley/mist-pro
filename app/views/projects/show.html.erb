@@ -14,4 +14,6 @@
   <div class="p-8 bg-white rounded shadow">
     <%= render @project %>
   </div>
+  <%= render 'jobs/form', project: @project, job: Job.new %>
+
 </div>

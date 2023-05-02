@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_14_184430) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_01_175958) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -134,6 +134,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_184430) do
     t.index ["user_id"], name: "index_api_tokens_on_user_id"
   end
 
+  create_table "change_orders", force: :cascade do |t|
+    t.string "name"
+    t.string "category"
+    t.date "start_date"
+    t.date "end_date"
+    t.decimal "cost"
+    t.decimal "amount_down"
+    t.date "amount_down_date"
+    t.decimal "amount_with_held"
+    t.date "amount_with_held_date"
+    t.text "contact_info"
+    t.boolean "status"
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_change_orders_on_project_id"
+  end
+
   create_table "clients", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -162,6 +180,58 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_184430) do
     t.string "access_token_secret"
     t.string "owner_type"
     t.index ["owner_id", "owner_type"], name: "index_connected_accounts_on_owner_id_and_owner_type"
+  end
+
+  create_table "crew_members", force: :cascade do |t|
+    t.bigint "crew_id", null: false
+    t.bigint "employee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["crew_id"], name: "index_crew_members_on_crew_id"
+    t.index ["employee_id"], name: "index_crew_members_on_employee_id"
+  end
+
+  create_table "crews", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "employees", force: :cascade do |t|
+    t.string "name"
+    t.integer "workable_hours"
+    t.boolean "active"
+    t.decimal "wage"
+    t.string "email"
+    t.string "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "job_assignments", force: :cascade do |t|
+    t.bigint "job_id", null: false
+    t.bigint "employee_id", null: false
+    t.bigint "crew_id", null: false
+    t.date "employee_start_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["crew_id"], name: "index_job_assignments_on_crew_id"
+    t.index ["employee_id"], name: "index_job_assignments_on_employee_id"
+    t.index ["job_id"], name: "index_job_assignments_on_job_id"
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.string "name"
+    t.integer "bid_hours"
+    t.integer "actual_hours"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "cost_code"
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "change_order_id"
+    t.index ["project_id"], name: "index_jobs_on_project_id"
   end
 
   create_table "notification_tokens", force: :cascade do |t|
@@ -355,6 +425,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_184430) do
   add_foreign_key "accounts", "users", column: "owner_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "api_tokens", "users"
+  add_foreign_key "change_orders", "projects"
+  add_foreign_key "crew_members", "crews"
+  add_foreign_key "crew_members", "employees"
+  add_foreign_key "job_assignments", "crews"
+  add_foreign_key "job_assignments", "employees"
+  add_foreign_key "job_assignments", "jobs"
+  add_foreign_key "jobs", "projects"
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
   add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"
   add_foreign_key "pay_subscriptions", "pay_customers", column: "customer_id"

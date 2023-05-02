@@ -44,7 +44,7 @@
       </div>
       <div>
         <dt class="text-dark-lava font-medium">Amount Withheld Date</dt>
-        <dd class="text-dark-lava"><%= project.amount_with_held_date.strftime("%d %b %Y") %></dd>
+        <dd class="text-dark-lava"><%= project.amount_with_held_date&.strftime("%d %b %Y") %></dd>
       </div>
       <div>
         <dt class="text-dark-lava font-medium">Contact Info</dt>
@@ -59,32 +59,8 @@
       <div class="mt-6">
         <h3 class="text-carolina-blue font-medium text-2xl mb-4">Jobs</h3>
         <div class="overflow-x-auto">
-          <table class="table-auto border-collapse w-full">
-            <thead>
-            <tr>
-              <th class="text-left px-4 py-2 bg-carolina-blue text-white rounded-tl-lg">Name</th>
-              <th class="text-left px-4 py-2 bg-carolina-blue text-white">Crew</th>
-              <th class="text-left px-4 py-2 bg-carolina-blue text-white">Bid Hours</th>
-              <th class="text-left px-4 py-2 bg-carolina-blue text-white">Actual Hours</th>
-              <th class="text-left px-4 py-2 bg-carolina-blue text-white">Start Date</th>
-              <th class="text-left px-4 py-2 bg-carolina-blue text-white">End Date</th>
-              <th class="text-left px-4 py-2 bg-carolina-blue text-white rounded-tr-lg">Cost</th>
-            </tr>
-            </thead>
-          <tbody>
-          <%# project.jobs.each do |job| %>
-<!--            <tr>-->
-<!--              <td class="border px-4 py-2"><%#= job.name %></td>-->
-<!--              <td class="border px-4 py-2"><%#= job.crew %></td>-->
-<!--              <td class="border px-4 py-2"><%#= job.bid_hours %></td>-->
-<!--              <td class="border px-4 py-2"><%#= job.actual_hours %></td>-->
-<!--              <td class="border px-4 py-2"><%#= job.start_date %></td>-->
-<!--              <td class="border px-4 py-2"><%#= job.end_date %></td>-->
-<!--              <td class="border px-4 py-2"><%#= job.cost %></td>-->
-<!--            </tr>-->
-          <%# end %>
-          </tbody>
-        </table>
+  <%= render 'jobs/jobs_list', project: project %>
+
       </div>
       <div class="mt-6">
         <%#= render partial: 'jobs/form', locals: { project: project, job: Job.new } %>

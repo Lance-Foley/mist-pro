@@ -1,0 +1,42 @@
+# == Schema Information
+#
+# Table name: jobs
+#
+#  id              :bigint           not null, primary key
+#  actual_hours    :integer
+#  bid_hours       :integer
+#  cost_code       :string
+#  end_date        :date
+#  name            :string
+#  start_date      :date
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  change_order_id :bigint
+#  project_id      :bigint           not null
+#
+# Indexes
+#
+#  index_jobs_on_project_id  (project_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (project_id => projects.id)
+#
+
+one:
+  name: MyString
+  bid_hours: 1
+  actual_hours: 1
+  start_date: 2023-05-01
+  end_date: 2023-05-01
+  cost_code: MyString
+  project: one
+
+two:
+  name: MyString
+  bid_hours: 1
+  actual_hours: 1
+  start_date: 2023-05-01
+  end_date: 2023-05-01
+  cost_code: MyString
+  project: two

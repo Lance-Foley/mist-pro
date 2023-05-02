@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @job.name %>
+</p>
+
+<p>
+  <strong>Bid Hours:</strong>
+  <%= @job.bid_hours %>
+</p>
+
+<p>
+  <strong>Actual Hours:</strong>
+  <%= @job.actual_hours %>
+</p>
+
+<p>
+  <strong>Start Date:</strong>
+  <%= @job.start_date %>
+</p>
+
+<p>
+  <strong>End Date:</strong>
+  <%= @job.end_date %>
+</p>
+
+<p>
+  <strong>Cost Code:</strong>
+  <%= @job.cost_code %>
+</p>
+
+<%= link_to 'Edit', edit_project_job_path(@project, @job) %> |
+<%= link_to 'Back', project_path(@project) %>
+

@@ -1,0 +1,31 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Bid Hours</th>
+      <th>Actual Hours</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Cost Code</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% project.jobs.each do |job| %>
+      <tr>
+        <td><%= job.name %></td>
+        <td><%= job.bid_hours %></td>
+        <td><%= job.actual_hours %></td>
+        <td><%= job.start_date %></td>
+        <td><%= job.end_date %></td>
+        <td><%= job.cost_code %></td>
+        <td>
+          <%= link_to 'Show', [project, job] %>
+          <%= link_to 'Edit', edit_project_job_path(project, job) %>
+          <%= link_to 'Delete', [project, job], method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

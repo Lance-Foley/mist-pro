@@ -1,0 +1,76 @@
+<div data-controller="job-form">
+  <%= form_with(model: [project, job], local: true) do |form| %>
+    <% if job.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
+
+        <ul>
+          <% job.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :bid_hours %>
+      <%= form.number_field :bid_hours %>
+    </div>
+
+    <div class="field">
+      <%= form.label :actual_hours %>
+      <%= form.number_field :actual_hours %>
+    </div>
+
+    <div class="field">
+      <%= form.label :start_date %>
+      <%= form.date_field :start_date %>
+    </div>
+
+    <div class="field">
+      <%= form.label :end_date %>
+      <%= form.date_field :end_date %>
+    </div>
+
+    <div class="field">
+      <%= form.label :cost_code %>
+      <%= form.text_field :cost_code %>
+    </div>
+
+    <div class="field">
+      <%= form.label "Crews" %>
+      <%= collection_select(:job, :crew_ids, Crew.all, :id, :name, {}, { multiple: true, data: { job_form_target: "crewSelect" } }) %>
+    </div>
+
+    <div id="crew-employees">
+      <% Crew.all.each do |crew| %>
+        <div class="field" id="crew-<%= crew.id %>-employees" style="display: none;" data-job-form-target="crewEmployeeField">
+          <%= form.label "Employees for #{crew.name} Crew" %>
+          <%= collection_select("crew_#{crew.id}", :employee_ids, crew.employees, :id, :name, {}, { multiple: true }) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="available-employees">
+      <h3>Available Employees:</h3>
+      <% Employee.all.each do |employee| %>
+        <div data-job-form-target="availableEmployee" data-employee-id="<%= employee.id %>">
+          <%= employee.name %>
+        </div>
+      <% end %>
+    </div>
+    <button type="button" data-job-form-target="addButton">Add Selected Employee</button>
+
+    <div id="assigned-employees">
+      <h3>Assigned Employees:</h3>
+      <!-- Assigned employees will be added here -->
+    </div>
+
+    <%= form.submit %>
+  <% end %>
+</div>
+

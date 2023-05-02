@@ -1,0 +1,37 @@
+<%= search_form_for @q,url: job_overview_index_path do |f| %>
+  <div>
+    <%= f.label :name_cont, 'Job name contains' %>
+    <%= f.search_field :name_cont %>
+  </div>
+  <div>
+    <%= f.label :project_name_cont, 'Project name contains' %>
+    <%= f.search_field :project_name_cont %>
+  </div>
+  <div>
+    <%= f.label :change_order_name_cont, 'Change order name contains' %>
+    <%= f.search_field :change_order_name_cont %>
+  </div>
+  <%= f.submit 'Search' %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= sort_link @q, :name, 'Job Name' %></th>
+      <th><%= sort_link @q, 'project.name', 'Project Name' %></th>
+      <th><%= sort_link @q, 'change_order.name', 'Change Order Name' %></th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @jobs.each do |job| %>
+      <tr>
+        <td><%= job.name %></td>
+        <td><%= job.project&.name %></td>
+        <td><%= job.change_order&.name %></td>
+         <td><%= link_to 'Edit', edit_project_job_path(job.project,job) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

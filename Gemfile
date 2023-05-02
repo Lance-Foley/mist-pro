@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "~> 3.2.1"
+ruby "~> 3.2.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 7.0.0"
@@ -22,7 +22,8 @@ gem "turbo-rails", "~> 1.0", ">= 1.0.1"
 gem "stimulus-rails", "~> 1.0", ">= 1.0.2"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder", github: "excid3/jbuilder", branch: "partial-paths" # "~> 2.11"
+# "~> 2.11"
+gem "jbuilder", github: "excid3/jbuilder", branch: "partial-paths"
 
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.8"
@@ -42,16 +43,18 @@ gem "image_processing", "~> 1.12"
 # Security update
 gem "nokogiri", ">= 1.12.5"
 
+# search & Filter
+gem "ransack"
+
 group :development, :test do
   # Optional debugging tools
   # gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   # gem "pry-rails"
 
   gem "annotate", github: "excid3/annotate_models", branch: "rails7"
+  gem "erb_lint", require: false
   gem "letter_opener_web", "~> 2.0"
   gem "standard", require: false
-  gem "erb_lint", require: false
-
   # Security tooling to
   # gem "brakeman"
   # gem "bundler-audit", github: "rubysec/bundler-audit"
@@ -63,7 +66,6 @@ group :development do
 
   # A fully configurable and extendable Git hook manager
   gem "overcommit", require: false
-
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler", ">= 2.3.3"
 
@@ -83,10 +85,11 @@ end
 gem "jumpstart", path: "lib/jumpstart", group: :omit
 
 gem "acts_as_tenant", "~> 0.6"
-gem "administrate", github: "excid3/administrate", branch: "jumpstart" # '~> 0.10.0'
+# '~> 0.10.0'
+gem "administrate", github: "excid3/administrate", branch: "jumpstart"
 gem "administrate-field-active_storage", "~> 0.4.1"
-gem "cssbundling-rails", "~> 1.1.0"
 gem "country_select", "~> 8.0"
+gem "cssbundling-rails", "~> 1.1.0"
 gem "devise", "~> 4.9.0"
 gem "devise-i18n", "~> 1.10"
 gem "inline_svg", "~> 1.6"
@@ -112,9 +115,7 @@ gem "ruby-oembed", "~> 0.16.0", require: "oembed"
 gem "whenever", "~> 1.0", require: false
 
 # Jumpstart manages a few gems for us, so install them from the extra Gemfile
-if File.exist?("config/jumpstart/Gemfile")
-  eval_gemfile "config/jumpstart/Gemfile"
-end
+eval_gemfile("config/jumpstart/Gemfile") if File.exist?("config/jumpstart/Gemfile")
 
 # We recommend using strong migrations when your app is in production
 # gem "strong_migrations", "~> 0.7.6"

@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: employees
+#
+#  id             :bigint           not null, primary key
+#  active         :boolean
+#  email          :string
+#  name           :string
+#  phone_number   :string
+#  wage           :decimal(, )
+#  workable_hours :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
+one:
+  name: MyString
+  workable_hours: 1
+  active: false
+  wage: 9.99
+  email: MyString
+  phone_number: MyString
+
+two:
+  name: MyString
+  workable_hours: 1
+  active: false
+  wage: 9.99
+  email: MyString
+  phone_number: MyString
